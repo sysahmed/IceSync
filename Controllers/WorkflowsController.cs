@@ -105,16 +105,8 @@ namespace IceSync.Controllers
             StringContent stringContent = new StringContent(JsonConvert.SerializeObject(Id), System.Text.Encoding.UTF8, "application/json");
             httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
             var result=  await httpClient.PostAsync(url, stringContent);
-            if (result.IsSuccessStatusCode)
-            {
-                  ViewData["ToplamPersonal"] = "Hello";
-            }
-            else
-            {
-                Details(Id);
-            }
-            //await GetWorkflows();
-          //return Redirect($"~/Workflows/Details/"+Id);
+            await GetWorkflows();
+            return Redirect($"~/Workflows/Details/"+Id);
         }
     
         private bool WorkflowExists(int id)
